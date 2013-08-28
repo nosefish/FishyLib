@@ -1,0 +1,5 @@
+name = FishyLib
+main-class = de.nosefish.fishylib.FishyLib
+isLibrary = false
+author = nosefish
+version = 0.0.6
