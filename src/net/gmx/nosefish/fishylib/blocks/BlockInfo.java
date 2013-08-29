@@ -14,39 +14,6 @@ import net.gmx.nosefish.fishylib.worldmath.FishyVectorDouble;
 import net.gmx.nosefish.fishylib.worldmath.FishyVectorInt;
 
 public class BlockInfo {
-//	private static final Short[] rs_connecting = {
-//			BlockType.DetectorRail.getId(),
-//			BlockType.DaylightSensor.getId(),
-//			BlockType.HeavyWeightedPressurePlate.getId(),
-//			BlockType.Lever.getId(),
-//			BlockType.LightWeightedPressurePlate.getId(),
-//			BlockType.RedstoneBlock.getId(),
-//			BlockType.RedstoneComparatorOff.getId(),
-//			BlockType.RedstoneComparatorOn.getId(),
-//			BlockType.RedstoneRepeaterOff.getId(),
-//			BlockType.RedstoneRepeaterOn.getId(),
-//			BlockType.RedstoneTorchOff.getId(),
-//			BlockType.RedstoneTorchOn.getId(),
-//			BlockType.RedstoneWire.getId(),
-//			BlockType.StoneButton.getId(),
-//			BlockType.StonePlate.getId(),
-//			BlockType.TrappedChest.getId(),
-//			BlockType.TripwireHook.getId(),
-//			BlockType.WoodenButton.getId(),
-//			BlockType.WoodPlate.getId()
-//	}; 
-//	static final Set<Short> RS_CONNECTING_IDS = 
-//			Collections.unmodifiableSet(new TreeSet<Short>(Arrays.asList(rs_connecting)));
-//	
-//	private static final Short[] rs_connecting_directional = {
-//		BlockType.RedstoneComparatorOff.getId(),
-//		BlockType.RedstoneComparatorOn.getId(),
-//		BlockType.RedstoneRepeaterOff.getId(),
-//		BlockType.RedstoneRepeaterOn.getId()
-//	};
-//	static final Set<Short> RS_CONNECTING_DIRECTIONAL_IDS = 
-//			Collections.unmodifiableSet(new TreeSet<Short>(Arrays.asList(rs_connecting_directional)));
-	
 
 			
 	public static FishyDirection getSignPostDirection(int dataValue) {
@@ -266,7 +233,9 @@ public class BlockInfo {
 		return BlockInfo.isRedstoneConnector(blockTypeID, blockData, connectionDirection);
 	}
 	
-	
+	public static boolean canPlayerPassThrough(int blockId) {
+		return BlocksPlayersCanPass.ids.contains(blockId);
+	}
 	
 	
 	
