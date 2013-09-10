@@ -68,7 +68,7 @@ public class ConcurrentMapWithTreeSet<K,V>{
 		return map.keySet();
 	}
 
-	public Set<V> remove(Object key) {
+	public Set<V> removeKey(Object key) {
 		return map.remove(key);
 	}
 	
