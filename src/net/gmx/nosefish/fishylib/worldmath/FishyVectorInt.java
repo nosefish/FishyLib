@@ -3,6 +3,14 @@ package net.gmx.nosefish.fishylib.worldmath;
 import java.util.Arrays;
 
 public class FishyVectorInt extends FishyVector {
+	public static final FishyVectorInt ZERO = new FishyVectorInt(0, 0, 0);
+	public static final FishyVectorInt UNIT_X = new FishyVectorInt(1, 0, 0); 
+	public static final FishyVectorInt UNIT_Y = new FishyVectorInt(0, 1, 0);
+	public static final FishyVectorInt UNIT_Z = new FishyVectorInt(0, 0, 1);
+	public static final FishyVectorInt UNIT_MINUS_X = new FishyVectorInt(-1,  0,  0); 
+	public static final FishyVectorInt UNIT_MINUS_Y = new FishyVectorInt( 0, -1,  0);
+	public static final FishyVectorInt UNIT_MINUS_Z = new FishyVectorInt( 0,  0, -1);
+	
 	final int[] vec;
 	
 	public FishyVectorInt(int x, int y, int z) {

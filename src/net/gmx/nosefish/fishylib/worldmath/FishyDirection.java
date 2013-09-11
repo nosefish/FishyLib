@@ -90,6 +90,7 @@ public enum FishyDirection {
 		case UP: return new FishyVectorDouble(0.0, 1.0, 0.0);
 		case DOWN: return new FishyVectorDouble(0.0, -1.0, 0.0);
 		case ERROR: return null;
+		// TODO: complete trivial cases, add constants to FishyVectorDouble
 		default:
 			double rad = this.toRadians();
 			return new FishyVectorDouble(Math.sin(rad), 0.0, - Math.cos(rad));
@@ -98,12 +99,12 @@ public enum FishyDirection {
 	
 	public FishyVectorInt toUnitIntVector() {
 		switch (this) {
-		case UP: return new FishyVectorInt(0, 1, 0);
-		case DOWN: return new FishyVectorInt(0, -1, 0);
-		case NORTH: return new FishyVectorInt(0, 0, -1);
-		case EAST: return new FishyVectorInt(1, 0, 0);
-		case SOUTH: return new FishyVectorInt(0, 0, 1);
-		case WEST: return new FishyVectorInt(-1, 0, 0);
+		case UP   : return FishyVectorInt.UNIT_Y;
+		case DOWN : return FishyVectorInt.UNIT_MINUS_Y;
+		case NORTH: return FishyVectorInt.UNIT_MINUS_Z;
+		case EAST : return FishyVectorInt.UNIT_X;
+		case SOUTH: return FishyVectorInt.UNIT_Z;
+		case WEST : return FishyVectorInt.UNIT_MINUS_X;
 		default: return null;
 		}
 	}
