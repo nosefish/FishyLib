@@ -10,7 +10,7 @@ public class FishyLocationInt extends FishyLocation{
 		point = new FishyPointInt(canaryLocation.getBlockX(),
 				canaryLocation.getBlockY(),
 				canaryLocation.getBlockZ());
-		this.world = FishyWorld.factory(canaryLocation.getWorld());
+		this.world = FishyWorld.factory(canaryLocation.getWorldName(), canaryLocation.getType());
 	}
 	
 	public FishyLocationInt(FishyWorld world, int x, int y, int z) {

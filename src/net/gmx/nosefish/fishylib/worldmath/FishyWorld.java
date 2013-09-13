@@ -82,8 +82,11 @@ public class FishyWorld {
 	}
 	
 	public static FishyWorld factory(World world) {
-		DimensionType dim = world.getType();
-		String name = makeWorldName(world.getName(), dim);
+		return factory(world.getName(), world.getType());
+	}
+	
+	public static FishyWorld factory(String worldName, DimensionType dim) {
+		String name = makeWorldName(worldName, dim);
 		FishyWorld toReturn = fishyWorldPool.get(name);
 		if (toReturn == null) {
 			FishyWorld newWorld = new FishyWorld(name, dim);
@@ -92,6 +95,7 @@ public class FishyWorld {
 		}
 		return toReturn;
 	}
+	
 	
 	/**
 	 * Gets the world for the name. Does not load unloaded worlds.
