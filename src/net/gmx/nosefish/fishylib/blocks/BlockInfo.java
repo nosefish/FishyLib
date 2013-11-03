@@ -237,6 +237,9 @@ public class BlockInfo {
 		return BlocksPlayersCanPass.ids.contains(blockId);
 	}
 	
+	public static boolean isStorageBlock(int blockId) {
+		return StorageBlocks.ids.contains(blockId);
+	}
 	
 	
 	// this doesn't belong here - doesn't provide information about a block.

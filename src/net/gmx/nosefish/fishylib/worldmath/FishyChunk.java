@@ -83,6 +83,7 @@ public class FishyChunk extends FishyLocationInt {
 		return chunkToWorld(worldToChunk(i));
 	}
 	
+	// TODO: why the factory method? convert to constructor
 	public static FishyChunk getChunkContaining(FishyLocation location) {
 		return new FishyChunk(location.getWorld(),
 				location.getIntX(),

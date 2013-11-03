@@ -190,4 +190,20 @@ public class FishyWorld {
 		return world + "_" + dimension.getName();
 	}
 
+	/**
+	 * <b>Not thread-safe! Only call from server thread, or be prepared for CMEs</b>
+	 * 
+	 * @param loc
+	 * @return
+	 */
+	public static boolean isBlockLoaded(FishyLocationInt loc) {
+		World world = loc.getWorld().getWorldIfLoaded();
+		if (world == null) {
+			return false;
+		}
+		if (! world.isChunkLoaded(loc.getIntX(), loc.getIntY(), loc.getIntZ())) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -2,16 +2,16 @@ package net.gmx.nosefish.fishylib.datastructures;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 
-public class ConcurrentMapWithTreeSet<K,V>{
+public class ConcurrentMapWithSet<K,V>{
 	private ConcurrentMap<K, Set<V>> map = new ConcurrentHashMap<K,Set<V>>(16, 0.9F, 2);
 	
 	public void clear() {
@@ -33,7 +33,7 @@ public class ConcurrentMapWithTreeSet<K,V>{
 				existingValues.add(value);
 			}
 			// create the entry if it doesn't exist
-			Set<V> newIdSet = Collections.synchronizedSet(new TreeSet<V>());
+			Set<V> newIdSet = Collections.synchronizedSet(new LinkedHashSet<V>(4, 0.9F));
 			newIdSet.add(value);
 			map.putIfAbsent(key, newIdSet);
 			// if we're among the least lucky fuckers in the world, the key was removed after the first get
@@ -92,6 +92,11 @@ public class ConcurrentMapWithTreeSet<K,V>{
 		return removedKeys;
 	}
 
+	/**
+	 * Caution: slow! O(n)!
+	 * 
+	 * @return
+	 */
 	public int size() {
 		return map.size();
 	}
