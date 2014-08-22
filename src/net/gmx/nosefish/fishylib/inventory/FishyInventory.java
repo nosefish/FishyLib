@@ -19,34 +19,40 @@ import net.gmx.nosefish.fishylib.worldmath.FishyVectorInt;
 import net.gmx.nosefish.fishylib.worldmath.FishyWorld;
 
 public class FishyInventory {
-	private List<Inventory> storage = new LinkedList<Inventory>();
-	private Set<Inventory> changedInventories = new HashSet<Inventory>(8);
-	private Set<FishyLocationInt> positions = new HashSet<FishyLocationInt>(8);
-	private Set<Integer> allowedBlocks = new TreeSet<Integer>();
+	private List<Inventory> storage = new LinkedList<>();
+	private Set<Inventory> changedInventories = new HashSet<>(8);
+	private Set<FishyLocationInt> positions = new HashSet<>(8);
+	private Set<Integer> allowedBlocks = new TreeSet<>();
 
 
-	/** There must be at least one type of storage block allowed, or you won't be able
-	 *  to add storage blocks.
-	 * 
-	 * @param type Block.Type to allow as storage. Invalid types will be ignored.
+	/** There must be at least one type of storage block allowed,
+         * or you won't be able
+	 * to add storage blocks.
+	 *
+	 * @param type Block.Type to allow as storage.
+         *             Invalid types will be ignored.
 	 */
 	public void addAllowedStorageBlockType(BlockType type) {
 		allowedBlocks.add(new Integer(type.getId()));
 	}
 
-	/** There must be at least one type of storage block allowed, or you won't be able
-	 *  to add storage blocks.
-	 * 
-	 * @param type block id to allow as storage. Invalid types will be ignored.
+	/** There must be at least one type of storage block allowed,
+         * or you won't be able
+	 * to add storage blocks.
+	 *
+	 * @param type block id to allow as storage.
+         *             Invalid types will be ignored.
 	 */
 	public void addAllowedStorageBlockType(int type) {
 		allowedBlocks.add(type);
 	}
 
-	/** There must be at least one type of storage block allowed, or you won't be able
-	 *  to add storage blocks.
-	 * 
-	 * @param type block ids to allow as storage. Invalid types will be ignored.
+	/** There must be at least one type of storage block allowed,
+         * or you won't be able
+	 * to add storage blocks.
+	 *
+	 * @param type block ids to allow as storage.
+         *             Invalid types will be ignored.
 	 */
 	public void addAllowedStorageBlockIds(Collection<Integer> type) {
 		allowedBlocks.addAll(type);
@@ -54,9 +60,11 @@ public class FishyInventory {
 
 	/**
 	 * Stores an Item.
-	 * 
-	 * @param item The Item to store. The amount gets reduced by the amount stored. Handle (item.getAmount < 1) !
-	 * @return true if all items in the stack have been stored, false otherwise.
+	 *
+	 * @param item The Item to store. The amount gets reduced by the amount
+         *             stored. Handle (item.getAmount < 1) !
+	 * @return <code>true</code> if all items in the stack have been stored,
+         *         <code>false</code otherwise.
 	 */
 	public boolean storeItem(Item item){
 		boolean allStored = false;
@@ -81,26 +89,29 @@ public class FishyInventory {
 		int maxStackSize = maxStackSize(item);
 		// the contents array gives us more control than the Inventory methods
 		Item[] contents = inv.getContents();
-		// stack if possible
-		if (maxStackSize > 1) {
-			for (int slot = 0; slot < contents.length; slot ++) {
-				if (contents[slot] == null) continue;
-				// there's something in this slot
-				int freeSpace = maxStackSize - contents[slot].getAmount(); 
-				if (freeSpace > 0
-						&& contents[slot].getId() == item.getId()
-						&& contents[slot].getDamage() == item.getDamage()
-						&& (contents[slot].getDataTag() == null
-						||contents[slot].getDataTag().equals(item.getDataTag()))) {
-					int storeAmount = (item.getAmount() > freeSpace) ? freeSpace : item.getAmount();
-					contents[slot].setAmount(contents[slot].getAmount() + storeAmount);
-					item.setAmount(item.getAmount() - storeAmount);
-					if (item.getAmount() < 1) {
-						return true;
-					}
-				}
-			}
-		}
+        // stack if possible
+        if (maxStackSize > 1) {
+            for (Item content : contents) {
+                if (content == null) {
+                    continue;
+                }
+                // there's something in this slot
+                int freeSpace = maxStackSize - content.getAmount();
+                if (freeSpace > 0
+                    && content.getId() == item.getId()
+                    && content.getDamage() == item.getDamage()) {
+                    if (content.getDataTag() == null
+                        || content.getDataTag().equals(item.getDataTag())) {
+                        int storeAmount = (item.getAmount() > freeSpace) ? freeSpace : item.getAmount();
+                        content.setAmount(content.getAmount() + storeAmount);
+                        item.setAmount(item.getAmount() - storeAmount);
+                        if (item.getAmount() < 1) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
 		// we've tried stacking but still have some items left in the stack
 		// do we have an empty slot?
 		int freeSlot = inv.getEmptySlot();
@@ -120,11 +131,11 @@ public class FishyInventory {
 	 * Takes a stack of items out of storage
 	 * @param id
 	 * @param datavalue
-	 * @param amount The desired amount. 
+	 * @param amount The desired amount.
 	 *                      The amount in the returned Item may be less than this
 	 *                      if there weren't enough items of this type in storage
 	 *                      or if the desired amount exceeds maximum stack size for
-	 *                      this item type. 
+	 *                      this item type.
 	 * @return The Item taken from storage, or null if no suitable item was found in this storage.
 	 */
 	public Item fetchItem(int id, int datavalue, int amount){
@@ -170,7 +181,7 @@ public class FishyInventory {
 	}
 
 	/** Checks if the storage contains at least the specified amount of the specified item
-	 * 
+	 *
 	 * @param id Item Id
 	 * @param datavalue data value to look for, -1 matches all
 	 * @param minAmount must be greater than 0
@@ -183,15 +194,14 @@ public class FishyInventory {
 		int count = 0;
 		for (Inventory inventory : this.storage) {
 			Item[] contents = inventory.getContents();
-			for (int slot = 0; slot < contents.length; slot++) {
-				if (contents[slot] != null
-						&& matchItem(contents[slot], id, datavalue)) {
-					count += contents[slot].getAmount();
-					if (count >= minAmount) {
-						return true;
-					}
-				}
-			}
+            for (Item content : contents) {
+                if (content != null && matchItem(content, id, datavalue)) {
+                    count += content.getAmount();
+                    if (count >= minAmount) {
+                        return true;
+                    }
+                }
+            }
 		}
 		return false;
 	}
@@ -250,9 +260,9 @@ public class FishyInventory {
 
 
 	public boolean fetchAllItems(Inventory target) {
-		Item item = null;
+		Item item;
 		// TODO: put these back to where they came from
-		List <Item> couldNotTransfer = new LinkedList<Item>();
+		List <Item> couldNotTransfer = new LinkedList<>();
 		while (true) {
 			item = fetchItem(-1, -1, -1);
 			if (item == null) {
@@ -290,7 +300,7 @@ public class FishyInventory {
 				return false;
 			}
 			int amountStored = amountBefore - item.getAmount();
-			amountRemaining -= amountStored; 
+			amountRemaining -= amountStored;
 		}
 		return true;
 	}
@@ -304,11 +314,15 @@ public class FishyInventory {
 	public boolean addStorageBlock(FishyLocationInt wbv) {
 		if (! FishyWorld.isBlockLoaded(wbv)) return false;
 		World world = wbv.getWorld().getWorldIfLoaded();
-		TileEntity cBlock = world.getTileEntityAt(wbv.getIntX(), wbv.getIntY(), wbv.getIntZ());
+		TileEntity cBlock = world.getTileEntityAt(
+            wbv.getIntX(), wbv.getIntY(), wbv.getIntZ());
 		if (cBlock == null) return false;
-		if (! allowedBlocks.contains(cBlock.getBlock().getType())) return false;
+		if (! allowedBlocks.contains((int)cBlock.getBlock().getTypeId())) {
+            return false;
+        }
 		if (cBlock instanceof Inventory) {
-			FishyLocationInt cBlockPos = new FishyLocationInt(wbv.getWorld(), cBlock.getX(), cBlock.getY(), cBlock.getZ());;
+			FishyLocationInt cBlockPos = new FishyLocationInt(
+                wbv.getWorld(), cBlock.getX(), cBlock.getY(), cBlock.getZ());
 			if (positions.add(cBlockPos)) {
 				storage.add((Inventory) cBlock);
 			}
@@ -342,7 +356,7 @@ public class FishyInventory {
 	 * Adds all storage blocks in a 5x5x2 cuboid centered around wbv,
 	 * as well as those located 2 and 3 blocks directly above to be used as storage space.
 	 * Used for [Deposit]/[Collect].
-	 * 
+	 *
 	 * @param wbv
 	 * @return true, if at least one storage block was added, false if no suitable block was found
 	 */
@@ -352,7 +366,7 @@ public class FishyInventory {
 		for (int x = -2; x <= 2; x++) {
 			for (int z = -2; z <= 2; z++) {
 				for (int y = -1; y <= 0; y++) {
-					FishyLocationInt cur = 
+					FishyLocationInt cur =
 							new FishyLocationInt(
 									wbv.getWorld(),
 									wbv.addIntVector(new FishyVectorInt(x, y, z)));

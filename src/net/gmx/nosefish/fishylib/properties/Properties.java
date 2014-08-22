@@ -58,7 +58,7 @@ public class Properties {
 			return propertiesFile.getBoolean(keyString);
 		}
 		// not found
-		logger.logWarning("Key not found in properties: " + keyString);
+		logger.warn("Key not found in properties: " + keyString);
 		return (Boolean)key.getDefault();
 	}
 
@@ -91,7 +91,7 @@ public class Properties {
 			return propertiesFile.getString(keyString);
 		}
 		// not found
-		logger.logWarning("Key not found in properties: " + keyString);
+		logger.warn("Key not found in properties: " + keyString);
 		return (String)key.getDefault();
 	}
 
@@ -124,7 +124,7 @@ public class Properties {
 			return propertiesFile.getDouble(keyString);
 		}
 		// not found
-		logger.logWarning("Key not found in properties: " + keyString);
+		logger.warn("Key not found in properties: " + keyString);
 		return (Double)key.getDefault();
 	}
 
@@ -137,6 +137,7 @@ public class Properties {
 	 *            be null.
 	 * @param key
 	 *            the <Key> that identifies the property
+     * 
 	 * @return the value of the property, or <code>false</code> if the property is not
 	 *         configured.
 	 */
@@ -161,7 +162,7 @@ public class Properties {
 			return arrayContainsInt(valueArray, value);
 		}
 		// not found
-		logger.logWarning("Key not found in properties: " + keyString);
+		logger.warn("Key not found in properties: " + keyString);
 		return false;
 	}
 	
@@ -211,7 +212,7 @@ public class Properties {
 			return hasPermission(player, keyString, value, propertiesFile);
 		}
 		// not found
-		logger.logWarning("Key not found in properties: " + keyString);
+		logger.warn("Key not found in properties: " + keyString);
 		return false;
 	}
 	
@@ -223,7 +224,7 @@ public class Properties {
 			permStrings = propertiesFile.getStringArray(keyString);
 		} catch (UtilityException e) {
 			//something went wrong.
-			logger.logStacktrace("UtilityException while getting permissions for key " + keyString, e);
+			logger.error("UtilityException while getting permissions for key " + keyString, e);
 			return false;
 		}
 		for (String permString : permStrings) {
@@ -243,7 +244,7 @@ public class Properties {
 						}
 					} catch (UtilityException e) {
 						// something went wrong
-						logger.logStacktrace("UtilityException while getting permissions for key " + keyString, e);
+						logger.error("UtilityException while getting permissions for key " + keyString, e);
 						return false;
 					}
 				} else {

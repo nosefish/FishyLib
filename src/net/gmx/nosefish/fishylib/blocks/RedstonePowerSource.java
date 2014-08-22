@@ -15,8 +15,7 @@ public enum RedstonePowerSource {
 	Lever(BlockType.Lever.getId()),
 	LightWeightedPressurePlate(BlockType.LightWeightedPressurePlate.getId()),
 	RedstoneBlock(BlockType.RedstoneBlock.getId()),
-	RedstoneComparatorOff(BlockType.RedstoneComparatorOff.getId()),
-	RedstoneComparatorOn(BlockType.RedstoneComparatorOn.getId()),
+	RedstoneComparator(BlockType.RedstoneComparator.getId()),
 	RedstoneRepeaterOff(BlockType.RedstoneRepeaterOff.getId()),
 	RedstoneRepeaterOn(BlockType.RedstoneRepeaterOn.getId()),
 	RedstoneTorchOff(BlockType.RedstoneTorchOff.getId()),
@@ -30,7 +29,7 @@ public enum RedstonePowerSource {
 	WoodPlate(BlockType.WoodPlate.getId());
 	private int id;
 	
-	private static final Map<Integer, RedstonePowerSource> reverseMap = new TreeMap<Integer, RedstonePowerSource>();
+	private static final Map<Integer, RedstonePowerSource> reverseMap = new TreeMap<>();
 	static {
 		for (RedstonePowerSource value : RedstonePowerSource.values()) {
 			reverseMap.put(value.getId(), value);
@@ -39,8 +38,7 @@ public enum RedstonePowerSource {
 	
 	public static Set<RedstonePowerSource> directionalRSBlocks =
 			Collections.unmodifiableSet(EnumSet.of(
-			RedstoneComparatorOff,
-			RedstoneComparatorOn,
+			RedstoneComparator,
 			RedstoneRepeaterOff,
 			RedstoneRepeaterOn
 			));
@@ -56,14 +54,12 @@ public enum RedstonePowerSource {
 	public static Set<RedstonePowerSource> powerIsAlwaysOn =
 			Collections.unmodifiableSet(EnumSet.of(
 			RedstoneBlock,
-			RedstoneComparatorOn,
 			RedstoneRepeaterOn,
 			RedstoneTorchOn
 			));
 	
 	public static Set<RedstonePowerSource> powerIsAlwaysOff =
 			Collections.unmodifiableSet(EnumSet.of(
-			RedstoneComparatorOff,
 			RedstoneRepeaterOff,
 			RedstoneTorchOff
 			));
