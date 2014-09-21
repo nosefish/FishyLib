@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 public class BlocksPlayersCanPass {
 	static final SortedSet<Integer> ids; 
-	private static Integer[] idArray = new Integer[] {
+	private static final Integer[] idArray = new Integer[] {
 		0, 6, 8, 9, 10, 11,
 		27, 28, 30, 31,
 		32, 37, 38, 39, 40,
@@ -20,9 +20,8 @@ public class BlocksPlayersCanPass {
 		171 // version 1.6.2
 	};
 	static {
-		TreeSet <Integer> tmpSet = new TreeSet<Integer>();
+		TreeSet <Integer> tmpSet = new TreeSet<>();
 		Collections.addAll(tmpSet, idArray);
 		ids = Collections.unmodifiableSortedSet(tmpSet);
-		idArray = null;
 	}
 }

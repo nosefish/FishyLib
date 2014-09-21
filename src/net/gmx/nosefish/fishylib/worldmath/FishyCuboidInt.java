@@ -7,18 +7,18 @@ public class FishyCuboidInt {
 	
 	public FishyCuboidInt(FishyWorld world, FishyPointInt point1, FishyPointInt point2) {
 		this.world = world;
-		int[] lowPoint = point1.toIntArray();
-		int[] highPoint = point2.toIntArray();
+		int[] lowPointL = point1.toIntArray();
+		int[] highPointL = point2.toIntArray();
 		for (int i = 0; i < 3; i++) {
 			int t;
-			if (lowPoint[i] > highPoint[i]) {
-				t = lowPoint[i];
-				lowPoint[i] = highPoint[i];
-				highPoint[i] = t;
+			if (lowPointL[i] > highPointL[i]) {
+				t = lowPointL[i];
+				lowPointL[i] = highPointL[i];
+				highPointL[i] = t;
 			}
 		}
-		this.lowPoint = new FishyPointInt(lowPoint[0], lowPoint[1], lowPoint[2]);
-		this.highPoint = new FishyPointInt(highPoint[0], highPoint[1], highPoint[2]);
+		this.lowPoint = new FishyPointInt(lowPointL[0], lowPointL[1], lowPointL[2]);
+		this.highPoint = new FishyPointInt(highPointL[0], highPointL[1], highPointL[2]);
 	}
 
 	/**

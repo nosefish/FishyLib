@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 
 
 public class ConcurrentMapWithSet<K,V>{
-	private ConcurrentMap<K, Set<V>> map = new ConcurrentHashMap<K,Set<V>>(16, 0.9F, 2);
+	private final ConcurrentMap<K, Set<V>> map = new ConcurrentHashMap<>(16, 0.9F, 2);
 	
 	public void clear() {
 		map.clear();
@@ -56,7 +56,7 @@ public class ConcurrentMapWithSet<K,V>{
 		return map.entrySet();
 	}
 
-	public Set<V> get(Object key) {
+	public Set<V> get(K key) {
 		return map.get(key);
 	}
 
@@ -68,7 +68,7 @@ public class ConcurrentMapWithSet<K,V>{
 		return map.keySet();
 	}
 
-	public Set<V> removeKey(Object key) {
+	public Set<V> removeKey(K key) {
 		return map.remove(key);
 	}
 	
@@ -80,7 +80,7 @@ public class ConcurrentMapWithSet<K,V>{
 	 * @return the keys that were removed from the map because they had no more values
 	 */
 	public List<K> removeValue(V value) {
-		List<K>removedKeys = new LinkedList<K>();
+		List<K>removedKeys = new LinkedList<>();
 		for (Entry<K, Set<V>> entry : map.entrySet()) {
 			Set<V> valueSet = entry.getValue();
 			valueSet.remove(value);

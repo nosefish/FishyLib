@@ -27,7 +27,7 @@ public enum RedstonePowerSource {
 	TripwireHook(BlockType.TripwireHook.getId()),
 	WoodenButton(BlockType.WoodenButton.getId()),
 	WoodPlate(BlockType.WoodPlate.getId());
-	private int id;
+	private final int id;
 	
 	private static final Map<Integer, RedstonePowerSource> reverseMap = new TreeMap<>();
 	static {

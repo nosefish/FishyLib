@@ -12,9 +12,9 @@ import net.visualillusionsent.utils.PropertiesFile;
 import net.visualillusionsent.utils.UtilityException;
 
 public class Properties {
-	private Plugin plugin;
+	private final Plugin plugin;
 	private final Integer ALL = Integer.MIN_VALUE;
-	private Logman logger;
+	private final Logman logger;
 	
 	public Properties(Plugin plugin) {
 		this.plugin = plugin;
@@ -137,6 +137,7 @@ public class Properties {
 	 *            be null.
 	 * @param key
 	 *            the <Key> that identifies the property
+     * @param value
      * 
 	 * @return the value of the property, or <code>false</code> if the property is not
 	 *         configured.
@@ -219,7 +220,7 @@ public class Properties {
 	// performs the actual permission check
 	// assumes that the key exists
 	private boolean hasPermission(Player player, String keyString, int value, PropertiesFile propertiesFile) {
-		String[] permStrings = null;
+		String[] permStrings;
 		try {
 			permStrings = propertiesFile.getStringArray(keyString);
 		} catch (UtilityException e) {

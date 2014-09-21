@@ -2,12 +2,18 @@ package net.gmx.nosefish.fishylib.worldmath;
 
 public abstract class FishyPoint implements IFishyPoint{
 
+    @Override
 	public abstract int getIntX();
+    @Override
 	public abstract int getIntY();
+    @Override
 	public abstract int getIntZ();
 
+    @Override
 	public abstract double getDoubleX();
+    @Override
 	public abstract double getDoubleY();
+    @Override
 	public abstract double getDoubleZ();
 
 	public abstract FishyPoint addVector(FishyVector vector);
@@ -36,6 +42,7 @@ public abstract class FishyPoint implements IFishyPoint{
 	}
 	
 
+    @Override
 	public final boolean equalsPoint(IFishyPoint other) {
 		if (this == other) {
 			return true;

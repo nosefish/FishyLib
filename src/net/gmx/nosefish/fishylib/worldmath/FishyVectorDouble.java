@@ -69,6 +69,7 @@ public class FishyVectorDouble extends FishyVector{
 		return this.scalarMult((double)scalar);
 	}
 	
+    @Override
 	public FishyVectorDouble scalarMult(double scalar) {
 		return new FishyVectorDouble(
 				scalar * this.getDoubleX(),
@@ -82,6 +83,7 @@ public class FishyVectorDouble extends FishyVector{
 		return Arrays.hashCode(vec);
 	}
 
+    @Override
 	public boolean equals (Object other) {
 		if (this == other) {
 			return true;

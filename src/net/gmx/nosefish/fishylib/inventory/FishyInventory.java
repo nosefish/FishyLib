@@ -19,18 +19,18 @@ import net.gmx.nosefish.fishylib.worldmath.FishyVectorInt;
 import net.gmx.nosefish.fishylib.worldmath.FishyWorld;
 
 public class FishyInventory {
-	private List<Inventory> storage = new LinkedList<>();
-	private Set<Inventory> changedInventories = new HashSet<>(8);
-	private Set<FishyLocationInt> positions = new HashSet<>(8);
-	private Set<Integer> allowedBlocks = new TreeSet<>();
+	private final List<Inventory> storage = new LinkedList<>();
+	private final Set<Inventory> changedInventories = new HashSet<>(8);
+	private final Set<FishyLocationInt> positions = new HashSet<>(8);
+	private final Set<Integer> allowedBlocks = new TreeSet<>();
 
 
 	/** There must be at least one type of storage block allowed,
-         * or you won't be able
+     * or you won't be able
 	 * to add storage blocks.
 	 *
 	 * @param type Block.Type to allow as storage.
-         *             Invalid types will be ignored.
+     *             Invalid types will be ignored.
 	 */
 	public void addAllowedStorageBlockType(BlockType type) {
 		allowedBlocks.add(new Integer(type.getId()));

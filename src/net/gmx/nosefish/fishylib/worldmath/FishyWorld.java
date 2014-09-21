@@ -33,8 +33,8 @@ import net.canarymod.api.world.WorldManager;
  *
  */
 public class FishyWorld {
-	private static final Map<String, WeakReference<World>> cache = new HashMap<String, WeakReference<World>>(3);
-	private static final ConcurrentMap<String, FishyWorld> fishyWorldPool = new ConcurrentHashMap<String, FishyWorld>(3, 0.9F, 1);
+	private static final Map<String, WeakReference<World>> cache = new HashMap<>(3);
+	private static final ConcurrentMap<String, FishyWorld> fishyWorldPool = new ConcurrentHashMap<>(3, 0.9F, 1);
 	
 	private final String worldName;
 	private final DimensionType dimensionType;
@@ -118,7 +118,7 @@ public class FishyWorld {
 					returnWorld = Canary.getServer().getWorld(name);
 					if (returnWorld != null) {
 						// but it exists again (it's loaded, after all...)
-						cache.put(name, new WeakReference<World>(returnWorld));
+						cache.put(name, new WeakReference<>(returnWorld));
 					}
 				} 
 			} else {
@@ -126,7 +126,7 @@ public class FishyWorld {
 				returnWorld = Canary.getServer().getWorld(name);
 				if (returnWorld != null) {
 					// but it exists
-					cache.put(name, new WeakReference<World>(returnWorld));
+					cache.put(name, new WeakReference<>(returnWorld));
 				}
 			}
 		}
@@ -141,7 +141,7 @@ public class FishyWorld {
 	 * @return the matching <code>World</code>, or null if no world with that name exists
 	 */
 	public static World getWorld(String name) {
-		World returnWorld = null;
+		World returnWorld;
 		WeakReference<World> wRef = cache.get(name);
 		if (wRef != null) {
 			// found in cache, is the value still valid?
@@ -159,7 +159,7 @@ public class FishyWorld {
 				returnWorld = Canary.getServer().getWorld(name);
 				if (returnWorld != null) {
 					// but it exists again
-					cache.put(name, new WeakReference<World>(returnWorld));
+					cache.put(name, new WeakReference<>(returnWorld));
 				}
 			}
 		} else {
@@ -167,7 +167,7 @@ public class FishyWorld {
 			returnWorld = Canary.getServer().getWorld(name);
 			if (returnWorld != null) {
 				// but it exists
-				cache.put(name, new WeakReference<World>(returnWorld));
+				cache.put(name, new WeakReference<>(returnWorld));
 			}
 		}
 		return returnWorld;

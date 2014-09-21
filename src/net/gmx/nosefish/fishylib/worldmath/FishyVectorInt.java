@@ -25,14 +25,17 @@ public class FishyVectorInt extends FishyVector {
 				       };
 	}
 	
+    @Override
 	public int getIntX() {
 		return vec[0];
 	}
 	
+    @Override
 	public int getIntY() {
 		return vec[1];
 	}
 	
+    @Override
 	public int getIntZ() {
 		return vec[2];
 	}

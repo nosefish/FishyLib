@@ -170,7 +170,7 @@ public class BlockInfo {
 				if (belowToCheck.getTypeId() == BlockType.RedstoneWire.getId()) {
 					//System.out.println(direction + " matches 3");
 					outSet.add(direction); // matches 3)
-					continue;
+					//continue;
 				}
 			}
 		}
@@ -234,11 +234,11 @@ public class BlockInfo {
 	}
 	
 	public static boolean canPlayerPassThrough(int blockId) {
-		return BlocksPlayersCanPass.ids.contains(blockId);
+		return BlocksPlayersCanPass.ids.contains(new Integer(blockId));
 	}
 	
 	public static boolean isStorageBlock(int blockId) {
-		return StorageBlocks.ids.contains(blockId);
+		return StorageBlocks.ids.contains(new Integer(blockId));
 	}
 	
 	

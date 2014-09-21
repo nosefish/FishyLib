@@ -38,7 +38,7 @@ public enum FishyDirection {
 	// private fields
 	private final Double degrees;
 	private static final NavigableMap<Double, FishyDirection> index =
-			new TreeMap<Double, FishyDirection>();
+			new TreeMap<>();
 	static {
 		for (FishyDirection dir : FishyDirection.values()) {
 			if (dir.degrees != null) {

@@ -2,6 +2,11 @@ package net.gmx.nosefish.fishylib.worldmath;
 
 public abstract class FishyLocation extends FishyPoint implements IFishyLocation {
 
+    /**
+     *
+     * @return
+     */
+    @Override
 	public abstract FishyWorld getWorld();
 	public abstract FishyPoint getPoint();
 	
