@@ -18,6 +18,7 @@ import net.gmx.nosefish.fishylib.worldmath.FishyLocationInt;
 import net.gmx.nosefish.fishylib.worldmath.FishyVectorInt;
 import net.gmx.nosefish.fishylib.worldmath.FishyWorld;
 
+@Deprecated
 public class FishyInventory {
 	private final List<Inventory> storage = new LinkedList<>();
 	private final Set<Inventory> changedInventories = new HashSet<>(8);
